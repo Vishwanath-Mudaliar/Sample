@@ -1,0 +1,472 @@
+Searching and Sorting Algorithms:
+
+1.Searching Algorithms:
+=> The objective of these algorithms is to find for an element in an
+array of elements or records.
+
+Some of the Searching Algorithms are as follows:
+1. Linear Search
+2. Binary Search
+3. Jump Search
+
+1.Linear Search:
+- It is a type of searching algorithms, which search for an element or a
+record in a linear way, i.e., starting with first element it comapares 
+the search key with all the elements of array one after the other
+util the element is found.
+
+bool LinearSearch(int arr[],int size,int searchkey)
+{
+	bool flag=false;
+	for(int i=0;i<size;i++)
+	{
+		if(searchkey==arr[i])
+		{
+			flag=true;
+			break;
+		}
+	}
+	return flag;
+}
+
+2. Binary Search Algorithm:
+- It is a searching algorithms which repeatedly divides the search 
+interval in half.
+- As it reduces the search interval, the time complexity required for
+this algorithm is O(log n).
+
+int BinarySearch(int arr[], int size, int searchkey)
+{
+	int lb=0;
+	int ub=size-1;
+	while(lb <= ub)
+	{
+		int mid=(lb+ub)/2;
+		if(arr[mid]==searchkey)
+			retrun mid+1;
+		else if(searchkey > arr[mid])
+			lb=mid+1;
+		else if(searchkey < arr[mid])
+			ub=mid-1;
+	}
+	return -1;
+}
+
+3. Jump Search Algorithm:
+- It is a searching algorithm applied on sorted array.
+- The basic idea is to check fewer elements by jumping ahead by fixed 
+steps or skipping some elements in place of searching all elements.
+- The jumpping step can be any 'm' and in general it is considered as
+square root of the size of the array.
+	i.e., m=sqrt(size)
+
+
+int JumpSearch(int arr[], int size, int searchkey)
+{
+	int jump=sqrt(size);
+	int i;
+	for(i=0;arr[i]<searchkey;i=i+jump)
+	{
+	}
+	i=i-jump;
+	for(int j=i;j<=i+jump;j++)
+	{
+		if(arr[j]==searchkey)
+			return j+1;
+	}
+	return -1;
+}
+//Jump Search which uses Binary Search 
+int JumpSearch(int arr[], int size, int searchkey)
+{
+	int jump=sqrt(size);
+	int i=0;
+	while(arr[i]<searchkey)
+	{
+		i=i+jump;
+	}	
+	i=i-jump;
+	int lb=i,ub=i+jump;
+	while(lb<=ub)
+	{
+		int mid=(lb+ub)/2;
+		if(arr[mid]==searchkey)
+			return mid+1;
+		else if(arr[mid] < searchkey)
+			lb=mid+1;
+		else if(arr[mid] > searchkey)
+			ub=mid-1;
+	}	
+	return -1;
+}
+Sorting Algorithm:
+
+bubble sort algorithm
+
+int bubble(int a[],int n)
+{
+  int i,j,temp;
+  for(i=0;i<n-1;i++)
+{
+for(j=0;j<n-i-1;j++)
+{
+  if(a[j]>a[j+1])
+{
+  temp=a[j];
+  a[j]=a[j+1];
+  a[j+1]=temp;
+}
+}
+}
+
+selection sort algorthim
+
+int selection(int a[],int n)
+{
+   int i,j,temp;
+   for(i=0;i<n-1;i++)
+    {
+     for(j=i+1;j<n;j++)
+      {
+        if(a[i]>a[j])
+         {
+           temp=a[i];
+           a[i]=a[j];
+           a[j]=temp;  
+         }
+      }
+    }
+}
+
+insertion sort algorithm
+
+int insertion(int a[],int n)
+{
+int i,j,temp;
+for(i=1;i<n;i++)
+{
+   temp=a[i];
+    for(j=i;j>0&&a[j-1]>temp;j--)
+    {
+      a[j]=a[j-1];
+    }
+    a[j]=temp;
+}
+}
+
+
+problem 2:
+
+int BSearch(int arr[], int size, int searchkey)
+{
+	int lb=0,ub=size-1;
+	while(lb<=ub)
+	{
+		int mid=(lb+ub)/2;
+		if(arr[mid]==searchkey)
+			return mid;
+		else if(arr[mid] > searchkey)
+			ub=mid-1;
+		else if(arr[mid] < searchkey)
+			lb=mid+1;
+	}
+	return -1;
+}
+int main()
+{
+	int size,searchkey;
+	cin>>size;
+	int arr[size];
+	for(int i=0;i<size;i++)
+	{
+		cin>>arr[i];
+	}
+	cin>>searchkey;
+	int res=BSearch(arr,size,searchkey);
+	if(res==-1)
+		cout<<"NO OCCURRENCES";
+	else
+		cout<<res;
+}
+
+
+
+
+
+
+Problem 3:
+
+void BubbleSort(int arr[], int size)
+{
+	for(int i=0;i<size-1;i++)
+	{
+		for(int j=0;j<size-1-i;j++)
+		{
+			if(arr[j] > arr[j+1])
+			{
+				int temp=arr[j];
+				arr[j]=arr[j+1];
+				arr[j+1]=temp;
+			}
+		}
+	}
+}
+
+int main()
+{
+	int size;
+	cin>>size;
+	int arr[size];
+	for(int i=0;i<size;i++)
+	{
+		cin>>arr[i];
+	}
+	BubbleSort(arr,size);
+	for(int i=0;i<size;i++)
+	{
+		cout<<arr[i]<<" ";
+	}
+}
+Problem 5:
+void printArray(int arr[],int size)
+{
+	for(int i=0;i<size;i++)
+	{
+		cout<<arr[i]<<" ";
+	}
+}
+void SelectionSort(int arr[], int size)
+{
+	for(int i=0;i<size-1;i++)
+	{
+		for(int j=i+1;j<size;j++)
+		{
+			if(arr[i]>arr[j])
+			{
+				int temp=arr[i];
+				arr[i]=arr[j];
+				arr[j]=temp;
+			}
+		}
+		cout<<"Height order of students after iteration "<<i+1<<" "<<endl;
+		printArray(arr,size);
+	}
+}
+
+int main()
+{
+	int size;
+	cin>>size;
+	int arr[size];
+	for(int i=0;i<size;i++)
+	{
+		cin>>arr[i];
+	}
+	cout<<"Student's height order before sorting:"<<endl;
+	printArray(arr,size);
+	selectionSort(arr,size);
+	cout<<""<<endl;
+	printArray(arr,size);
+}
+
+
+
+REVISION:
+
+1. Linked List
+
+
+
+
+
+Types of Expression:
+
+1. Infix - ex. a + b
+
+2. Prefix - ex. + ab
+
+3. Postfix - ex. ab +
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
